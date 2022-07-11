@@ -2,7 +2,8 @@ import { useState, useEffect } from "react";
 import { CarritoComponent } from "./components/CarritoComponent";
 import { HeaderComponent } from "./components/HeaderComponent";
 import { ListadoProductosComponent } from "./components/ListadoProductosComponent";
-import {Pota} from './types'
+import { getAllPotas } from "./services/getAllPotas";
+import {Pota, PotasFromBack} from './types'
 
 interface AppState {
   potas: Array<Pota>
@@ -16,14 +17,9 @@ function App() {
   const [showCarrito, setShowCarrito] = useState<AppState["showCarrito"]>(false);
   
   useEffect(() => {
-    fetch('http://localhost:3001/productos')
-    .then(res => res.json())
-    .then(potas => {
-      console.log(potas)
-      setPotas(potas)
-
-    })
-  }, [])
+    
+    getAllPotas().then(setPotas)}
+  , [])
   
   return (
     <div

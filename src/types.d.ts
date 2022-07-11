@@ -6,3 +6,5 @@ export interface Pota {
   descripcion: string
   imagen: string
 }
+
+export type PotasFromBack = Array<Pota>
