@@ -6,7 +6,7 @@ export const HeaderComponent = () => {
         <img src="./gem.png" />
         <span>xxx Gemas</span>
       </div>
-      <button className="text-white hover:underline">Ver Carrito (xxx)</button>
+      <button className="text-white hover:underline position:relative">Ver Bolsa (xxx)</button>
     </div>
   );
 };
