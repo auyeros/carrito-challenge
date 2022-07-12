@@ -24,8 +24,7 @@ function App() {
     
     getAllPotas()
     .then(potas => {
-      console.log(potas)
-      setPotas(potas)
+    setPotas(potas)
       })
     }
   , [])
