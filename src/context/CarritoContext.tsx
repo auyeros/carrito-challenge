@@ -12,6 +12,7 @@ interface Context {
   quantity: number;
   addPota: (pota: Potas) => void;
   removePota: (potaId: number) => void;
+  resetCarrito: () => void;
 }
 
 const CarritoContext = createContext({} as Context)
@@ -68,12 +69,19 @@ const useProviderCarrito = () => {
     setGemas(newSaldo);
   }
 
+  const resetCarrito = () => {
+    setCarrito([])
+    setQuantity(0)
+    setGemas(3)
+  }
+
   return {
     carrito,
     gemas,
     potas,
     quantity,
     addPota,
-    removePota
+    removePota,
+    resetCarrito    
   }
 }

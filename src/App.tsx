@@ -1,20 +1,21 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { HeaderComponent } from "./components/HeaderComponent";
 import { ListadoProductosComponent } from "./components/ListadoProductosComponent";
-import { CarritoProvider, useCarrito } from "./context/CarritoContext"
+import { CarritoProvider } from "./context/CarritoContext"
+import { CarritoComponent } from "./components/CarritoComponent";
 
 
 function App() {
-  const [showCarrito, setShowCarrito] = useState<boolean>(false)
+  const [showCarrito, setShowCarrito] = useState(false)
   
 
   return (
     <CarritoProvider>
     <div className="min-h-full bg-fixed" style={{ backgroundImage: "url(background.webp)" }}>
-      <HeaderComponent />
+      <HeaderComponent setShowCarrito={setShowCarrito} />
       <div className="flex justify-center min-h-full">
         <div className="max-w-lg w-full py-16">
-        <ListadoProductosComponent />
+        {showCarrito ? <CarritoComponent setShowCarrito={setShowCarrito}/> : <ListadoProductosComponent />}
         </div>
       </div>
     </div>

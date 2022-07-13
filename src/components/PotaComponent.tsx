@@ -1,4 +1,5 @@
 import { useCarrito } from "../context/CarritoContext"
+import { useRestricts } from "../hooks/utils/useRestricts";
 
 type PotaProps = {
   pota: Potas;
@@ -7,9 +8,8 @@ type PotaProps = {
 export const PotaComponent = ({pota}: PotaProps) => {
   const {id, nombre, precio, categoria, descripcion, imagen } = pota;
   
-  const {addPota} = useCarrito()
-  const {removePota} = useCarrito()
-  const quantity = 0
+  const {addPota} = useCarrito();
+  const {isDisabled} = useRestricts(id, precio, categoria);
   return (
   <div className="max-w-sm bg-white rounded-lg shadow-md dark:bg-gray-800 dark:border-gray-700 flex items-center p-2">
     <img className="p-4 scale-150" src={imagen} alt={`${nombre}`} />
@@ -18,14 +18,13 @@ export const PotaComponent = ({pota}: PotaProps) => {
         <h5 className="text-l font-bold pr-2.5">{categoria}</h5>
         <p className="mb-3 font-normal text-gray-700 dark:text-gray-400">{descripcion?.substring(0, 100)}</p>
         <div className="flex">
-          {quantity === 0 ? (
+          {isDisabled === false ? (
             
-          <button onClick={()=> addPota(pota)} className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Añadir a la bolsa</button>  
+          <button disabled={isDisabled} onClick={()=> addPota(pota)} className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Añadir a la bolsa</button>  
            
           ) : (
             <div className="flex flex-col gap-3" >
             <button className="text-white bg-gray-700 focus:ring-4 focus:outline-none focus:ring-gray-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-gray-600 dark:hover:bg-gray:focus:ring-gray-800">No puedo man</button>
-            <button onClick={()=> removePota(id)} className="text-white bg-red-700 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-red-600 dark:hover:bg-red:focus:ring-red-800">Vender</button>  
            </div>
 
         )}  
