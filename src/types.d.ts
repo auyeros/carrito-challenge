@@ -1,4 +1,4 @@
-export interface Pota {
+interface Potas {
   id: number
   nombre: string
   precio: number
@@ -7,4 +7,3 @@ export interface Pota {
   imagen: string
 }
 
-export type PotasFromBack = Array<Pota>

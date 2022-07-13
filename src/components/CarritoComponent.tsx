@@ -1,7 +1,12 @@
-export const CarritoComponent = () => {
+import { useCarrito } from "../context/CarritoContext";
+
+export const CarritoComponent = ({}) => {
+ 
   return (
-    <div>
-      <button>Volver</button>
+      <div> <button>X</button>
+
+      <button>Bolsa Vacia</button>
     </div>
-  );
+  )
+
 };
