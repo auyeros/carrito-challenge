@@ -1,4 +1,5 @@
-import { createContext, useContext, ReactNode, useState } from "react";
+import { createContext, useContext, ReactNode, useState, useEffect } from "react";
+import { getAllPotas } from "../hooks/services/getAllPotas";
 
 type CarritoProviderProps = {
   children: ReactNode
@@ -6,6 +7,7 @@ type CarritoProviderProps = {
 
 interface Context {
   gemas: number;
+  potas: Potas[];
   carrito: Potas[];
   quantity: number;
   addPota: (pota: Potas) => void;
@@ -23,9 +25,7 @@ export function CarritoProvider({ children }: CarritoProviderProps) {
   const carrito = useProviderCarrito();
 
   return (
-    <CarritoContext.Provider 
-    value={
-      carrito}>
+    <CarritoContext.Provider value={carrito}>
     {children}
     {/* <CarritoComponent /> */}
   </CarritoContext.Provider>
@@ -33,9 +33,23 @@ export function CarritoProvider({ children }: CarritoProviderProps) {
 }
 
 const useProviderCarrito = () => {
-  const [carrito, setCarrito] = useState<Potas[]>([]);
+  const [potas, setPotas] = useState([] as Potas[])
+  const [carrito, setCarrito] = useState([] as Potas[]);
   const [gemas, setGemas] = useState<number>(3);
   const [quantity, setQuantity] = useState<number>(0);
+
+
+  useEffect(() => {
+    
+    getAllPotas()
+    .then(potas => {
+    setPotas(potas)
+    })
+    }
+  , [])
+  
+    
+
 
   const addPota = (pota: Potas) => {
     const newCarrito = [...carrito, pota];
@@ -57,6 +71,7 @@ const useProviderCarrito = () => {
   return {
     carrito,
     gemas,
+    potas,
     quantity,
     addPota,
     removePota

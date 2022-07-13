@@ -4,11 +4,10 @@ import { getAllPotas } from "../services/getAllPotas";
 export const usePotas = () => {
   const [potas, setPotas] = useState<Potas[]>([]);
   
-  const fetchData = useCallback(
-    async () => {
+  const fetchData = useCallback(async () => {
     try{  
       const potasFromApi = await getAllPotas();
-
+      console.log(potasFromApi)
       setPotas(potasFromApi);
     } catch (error){
       console.log(error);
