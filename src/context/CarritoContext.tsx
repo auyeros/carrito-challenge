@@ -1,5 +1,6 @@
 import { createContext, useContext, ReactNode, useState, useEffect } from "react";
 import { getAllPotas } from "../hooks/services/getAllPotas";
+import { useLocalStorage } from "../hooks/utils/useLocalStorage";
 
 type CarritoProviderProps = {
   children: ReactNode
@@ -35,7 +36,7 @@ export function CarritoProvider({ children }: CarritoProviderProps) {
 
 const useProviderCarrito = () => {
   const [potas, setPotas] = useState([] as Potas[])
-  const [carrito, setCarrito] = useState([] as Potas[]);
+  const [carrito, setCarrito] = useLocalStorage<Potas[]>("carrito-local", []);
   const [gemas, setGemas] = useState<number>(3);
   const [quantity, setQuantity] = useState<number>(0);
 

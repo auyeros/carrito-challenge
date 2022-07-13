@@ -1,6 +1,6 @@
 import { useCarrito } from "../context/CarritoContext";
 import { buyPotas } from "../hooks/services/buyPotas";
-import { PotaComponent } from "./PotaComponent";
+
 
 export const CarritoComponent = (props:{setShowCarrito: Function}) => {
   const cerrar = () => {
